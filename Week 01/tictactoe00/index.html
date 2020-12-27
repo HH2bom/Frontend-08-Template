@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe 游戏</title>
+    <style>
+        .cell {
+            /* display: inline-block + vertical-align: middle 保持纵向对齐*/
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            border: solid 1px white;
+
+            display: inline-block;
+            vertical-align: middle;
+
+            /* height: 100px + line-height: 100px 保证内容垂直居中 */
+            line-height: 100px;
+            font-size: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board"></div>
+    <script>
+        let pattern = [
+            [2, 0, 0],
+            [0, 1, 0],
+            [0, 0, 0]
+        ];
+
+  // render
+  function show() {
+            let board = document.getElementById("board");
+            board.innerHTML = "" // 清空内容的同时原有挂载的事件也一起销毁了
+
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    // 如果是要行/列模式访问则是 pattern[i][j]
+                    // 如果是要列/行模式访问则是 pattern[j][i]
+        
+                    // 当前逻辑是添加 3 个换一行所以应该使用行/列模式
+                    let cell = document.createElement("div");
+                    cell.classList.add("cell");
+                    board.appendChild(cell);
+
+                    cell.innerText =
+                        pattern[i][j] == 2 ? "❌" :
+                        pattern[i][j] == 1 ? "⭕️" : "";
+
+                    // 当前 cell 添加 click handler, cell 的值和
+                    cell.addEventListener("click", () => mark(i, j));
+                    
+                }
+                board.appendChild(document.createElement("br"));
+            }
+        }
+
+        show();
+    </script>
+</body>
+
+</html>
